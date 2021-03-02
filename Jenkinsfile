@@ -27,5 +27,11 @@ pipeline {
                 sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
+
+        stage ('Deploy in Microk8s'){
+            steps {
+                sh "kubectl create -f kubernetes.yaml"
+            }
+        }
     }
 }
