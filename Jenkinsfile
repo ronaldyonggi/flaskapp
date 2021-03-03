@@ -31,6 +31,18 @@ pipeline {
             }
         }
 
+        stage ('Delete all existing k8s services'){
+            steps {
+                sh "microk8s kubectl delete services --all"
+            }
+        }
+
+        stage ('Delete all existing k8s deployments'){
+            steps {
+                sh "microk8s kubectl delete deployments --all"
+            }
+        }
+
         stage ('Deploy in Microk8s'){
             steps {
                 sh "microk8s kubectl create -f kubernetes.yaml"
